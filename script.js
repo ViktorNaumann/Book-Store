@@ -1,6 +1,5 @@
-
-
 function renderBooks() {
+
     for (let i = 0; i < books.length; i++) {
         let element = document.getElementById('content');
         element.innerHTML += templateHtmlRender(i);
@@ -18,39 +17,32 @@ function addComment(i) {
 
     if (commentText === "") return;
 
-    books[i].comments.push({
+    books[i].comments.push({ 
         name: 'Viktor',
         comment: commentText
     });
 
     let commentSection = document.getElementById(`comments${i}`);
-
     commentSection.innerHTML = templateHtmlCommentRender(i, books[i].comments.length - 1) + commentSection.innerHTML;
-
     inputField.value = "";
 }
 
 function likeUnlike(i) {
-    let likedBook = books[i].liked;
     let likeButton = document.getElementById(`likeButton${i}`);
-
-    if (likedBook) {
-        books[i].liked = false;
-        books[i].likes += -1;
-        likeButton.src = "./img/heart-off.png";
-    } else {
-        books[i].liked = true;
+    let totalLikes = document.getElementById(`totalLikes${i}`);
+    books[i].liked = !books[i].liked;
+    if (books[i].liked) {
         books[i].likes += 1;
         likeButton.src = "./img/heart-on.png";
+    } else {
+        books[i].likes += -1;
+        likeButton.src = "./img/heart-off.png";
     }
-
-    document.getElementById(`totalLikes${i}`).innerText = books[i].likes;
+    totalLikes.innerText = books[i].likes;
 }
 
-
-
-
 function templateHtmlRender(i) {
+    let heartIcon = books[i].liked ? "./img/heart-on.png" : "./img/heart-off.png";
     return`
     <div class="book_list">
         <div>
@@ -66,9 +58,8 @@ function templateHtmlRender(i) {
             <div class="like_div">
                 <p>
                     <img id="likeButton${i}" class="like_heart"
-                    src="${books[i].liked ? './img/heart-on.png' : './img/heart-off.png'}"
-                    alt="like-button" 
-                    onclick="likeUnlike(${i})">
+                            src="${heartIcon}" alt="like-button"
+                            onclick="likeUnlike(${i})">
                     <span id="totalLikes${i}">${books[i].likes}</span>
                 </p></div>
         </div>
@@ -118,4 +109,3 @@ function templateHtmlCommentRender(i, y) {
     `;
 
 }
-
