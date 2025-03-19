@@ -64,7 +64,6 @@ body {
 }
 
 #content [id^="comments"] table {
-    width: 100%;
     border-collapse: collapse;
 }
 
@@ -128,3 +127,4 @@ p {
 .d_none {
     display: none;
 }
+

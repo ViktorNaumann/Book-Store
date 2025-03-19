@@ -23,7 +23,7 @@ function addComment(i) {
     });
 
     let commentSection = document.getElementById(`comments${i}`);
-    commentSection.innerHTML = templateHtmlCommentRender(i, books[i].comments.length - 1) + commentSection.innerHTML;
+    commentSection.innerHTML = templateHtmlCommentRender(i, books[i].comments.length -1) + commentSection.innerHTML;
     inputField.value = "";
 }
 
@@ -43,16 +43,14 @@ function likeUnlike(i) {
 
 function templateHtmlRender(i) {
     let heartIcon = books[i].liked ? "./img/heart-on.png" : "./img/heart-off.png";
-    return`
+    return /*html*/`
     <div class="book_list">
         <div>
-        <h2 class="title_of_book">${books[i].name}</h2>
+            <h2 class="title_of_book">${books[i].name}</h2>
         </div>
-
         <div class="book_logo">
             <img src="./img/book.png" alt="">
         </div>
-
         <div class="price_likes"> 
             <div><h3 class="book_price">${books[i].price.toFixed(2)} €</h3></div>
             <div class="like_div">
@@ -61,9 +59,9 @@ function templateHtmlRender(i) {
                             src="${heartIcon}" alt="like-button"
                             onclick="likeUnlike(${i})">
                     <span id="totalLikes${i}">${books[i].likes}</span>
-                </p></div>
+                </p>
+            </div>
         </div>
-
         <div class="table">
             <table>
                 <tr>
@@ -80,20 +78,16 @@ function templateHtmlRender(i) {
                 </tr>
             </table>    
         </div>  
-        
         <div class="commentary_header">
             <h3>Kommentare:</h3>
         </div>
-
         <div>
             <div id="comments${i}">
             </div>
         </div>
-
         <div>
             <input id="comment_input${i}" placeholder="Schreibe dein Kommentar ..." type="text"><button onclick="addComment(${i})">Absenden</button>
         </div>
-
     </div>`
 }
 
@@ -107,5 +101,4 @@ function templateHtmlCommentRender(i, y) {
 
         </table>
     `;
-
 }
